@@ -1,7 +1,6 @@
 # WorkTrace
 
-An application and network to trace what we've worked.
-This repository contains:
+An application and network to trace what we've worked. This repository contains:
 
 1. WorkTrace kernel libraries.
 2. The web-app server for local development and special platforms.
@@ -9,3 +8,7 @@ This repository contains:
 4. The shared libraries for code reuse among multiple entries.
 5. WorkTrace multi-platform application as editor.
 6. WorkTrace website including the viewer.
+
+## License
+
+AutoStories is licensed under [Mulan PSL v2](http://license.coscl.org.cn/MulanPSL2).

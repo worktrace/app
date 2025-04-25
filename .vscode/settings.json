@@ -22,11 +22,12 @@
   "files.associations": {
     "Cargo.lock": "toml",
     ".metadata": "yaml",
-    "pubspec.lock": "yaml"
+    "pubspec.lock": "yaml",
+    "LICENSE": "plaintext"
   },
 
   // Spell checker special words and check (requires recommended extension).
-  "cSpell.ignorePaths": [".git", ".dart_tool", "target"],
+  "cSpell.ignorePaths": [".git", ".dart_tool", "target", "CONTRIBUTORS.yaml"],
   "cSpell.words": [
     "cdylib",
     "dotenv",

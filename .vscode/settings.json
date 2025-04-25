@@ -11,11 +11,12 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[properties]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
   "[ignore]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
+  "[dotenv]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
   "[toml]": { "editor.defaultFormatter": "tamasfe.even-better-toml" },
   "[dart]": { "editor.defaultFormatter": "Dart-Code.dart-code" },
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer",
-    "editor.tabSize": 2
+    "editor.tabSize": 4
   },
 
   "files.associations": {
@@ -26,5 +27,15 @@
 
   // Spell checker special words and check (requires recommended extension).
   "cSpell.ignorePaths": [".git", ".dart_tool", "target"],
-  "cSpell.words": ["esbenp", "foxundermoon", "pubspec", "tamasfe"]
+  "cSpell.words": [
+    "cdylib",
+    "dotenv",
+    "esbenp",
+    "foxundermoon",
+    "pubspec",
+    "symbolication",
+    "tamasfe",
+    "thiserror",
+    "worktrace"
+  ]
 }

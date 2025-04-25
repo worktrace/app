@@ -1,0 +1,4 @@
+# Git tracked but auto-generated files.
+Cargo.toml
+.metadata
+pubspec.lock

@@ -1,0 +1,30 @@
+{
+  // General normalizations.
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "editor.tabSize": 2,
+  "editor.rulers": [80],
+
+  // Auto format on save (requires recommended extensions).
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": { "source.organizeImports": "always" },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[properties]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
+  "[ignore]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
+  "[toml]": { "editor.defaultFormatter": "tamasfe.even-better-toml" },
+  "[dart]": { "editor.defaultFormatter": "Dart-Code.dart-code" },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.tabSize": 2
+  },
+
+  "files.associations": {
+    "Cargo.lock": "toml",
+    ".metadata": "yaml",
+    "pubspec.lock": "yaml"
+  },
+
+  // Spell checker special words and check (requires recommended extension).
+  "cSpell.ignorePaths": [".git", ".dart_tool", "target"],
+  "cSpell.words": ["esbenp", "foxundermoon", "pubspec", "tamasfe"]
+}

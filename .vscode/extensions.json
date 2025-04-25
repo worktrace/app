@@ -7,6 +7,7 @@
 
     // Configurations.
     "tamasfe.even-better-toml",
+    "dotenv.dotenv-vscode",
     "redhat.vscode-yaml",
 
     // Code qualities.

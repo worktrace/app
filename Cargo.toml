@@ -12,7 +12,14 @@ path = "src/lib.rs"
 name = "worktrace"
 path = "src/main.rs"
 
+[workspace]
+members = ["generator"]
+
 [dependencies]
 axum = "0.8.3"
 thiserror = "2.0.12"
 tokio = { version = "1.44.2", features = ["full"] }
+worktrace_generator = { version = "0.1.0", path = "generator" }
+
+[build-dependencies]
+worktrace_generator = { version = "0.1.0", path = "generator" }

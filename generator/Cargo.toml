@@ -5,6 +5,7 @@ repository = "https://github.com/worktrace/app"
 license = "MulanPSL-2.0"
 version = "0.1.0"
 edition = "2024"
+include = ["src", "Cargo.toml", "CONTRIBUTORS.yaml", "LICENSE", "README.md"]
 
 [lib]
 crate-type = ["lib"]

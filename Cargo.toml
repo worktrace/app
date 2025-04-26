@@ -2,9 +2,9 @@
 name = "worktrace"
 description = "An application and network to trace what we've worked."
 repository = "https://github.com/worktrace/app"
+license = "MulanPSL-2.0"
 version = "0.1.0"
 edition = "2024"
-license = "MulanPSL-2.0"
 
 [lib]
 crate-type = ["lib", "cdylib"]

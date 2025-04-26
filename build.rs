@@ -17,13 +17,27 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
-use std::{env::current_dir, fs::read_to_string, path::PathBuf};
+use std::{
+    env::var,
+    fs::{copy, read_to_string},
+    path::PathBuf,
+};
 use worktrace_generator::{fmt::eol, license::LicenseNotationGenerator};
 
 fn main() -> std::io::Result<()> {
-    let root = current_dir()?;
-    update_cargo_license(&root)?;
+    let root = PathBuf::from(var("CARGO_MANIFEST_DIR").unwrap());
+    update_cargo_license(&root).ok();
+    update_child_repo_license_files(&root);
     Ok(())
+}
+
+const GENERATOR_CHILD_REPO_PATH: &str = "gen";
+
+fn update_child_repo_license_files(root: &PathBuf) {
+    let generator = root.join(GENERATOR_CHILD_REPO_PATH);
+    ["LICENSE", "CONTRIBUTORS.yaml"].iter().for_each(|name| {
+        copy(root.join(name), generator.join(name)).ok();
+    });
 }
 
 fn update_cargo_license(root: &PathBuf) -> std::io::Result<()> {
@@ -33,7 +47,7 @@ fn update_cargo_license(root: &PathBuf) -> std::io::Result<()> {
         separator: "=== Auto generated, DO NOT EDIT ABOVE ===".into(),
         eol: eol::LF,
     };
-    generator.update_dir(&root.join("generator").join("src"))?;
+    generator.update_dir(&root.join(GENERATOR_CHILD_REPO_PATH).join("src"))?;
     generator.update_dir(&root.join("src"))?;
     generator.update_file(&root.join("build.rs"))
 }

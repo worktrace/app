@@ -1,7 +1,22 @@
 [package]
 name = "worktrace"
+description = "An application and network to trace what we've worked."
+repository = "https://github.com/worktrace/app"
+license = "MulanPSL-2.0"
 version = "0.1.0"
 edition = "2024"
+
+include = [
+  "/generator/src",
+  "/generator/Cargo.toml",
+  "/src",
+  "/.license.txt",
+  "/build.rs",
+  "/Cargo.toml",
+  "/CONTRIBUTORS.yaml",
+  "/LICENSE",
+  "/README.md",
+]
 
 [lib]
 crate-type = ["lib", "cdylib"]
@@ -13,13 +28,13 @@ name = "worktrace"
 path = "src/main.rs"
 
 [workspace]
-members = ["generator"]
+members = ["gen"]
 
 [dependencies]
 axum = "0.8.3"
 thiserror = "2.0.12"
 tokio = { version = "1.44.2", features = ["full"] }
-worktrace_generator = { version = "0.1.0", path = "generator" }
+worktrace_generator = { version = "0.1.1", path = "gen" }
 
 [build-dependencies]
-worktrace_generator = { version = "0.1.0", path = "generator" }
+worktrace_generator = { version = "0.1.1", path = "gen" }

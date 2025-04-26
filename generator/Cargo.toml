@@ -1,0 +1,12 @@
+[package]
+name = "worktrace_generator"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["lib"]
+name = "worktrace_generator"
+path = "src/lib.rs"
+
+[dependencies]
+thiserror = "2.0.12"

@@ -703,4 +703,12 @@ dependencies = [
  "axum",
  "thiserror",
  "tokio",
+ "worktrace_generator",
+]
+
+[[package]]
+name = "worktrace_generator"
+version = "0.1.0"
+dependencies = [
+ "thiserror",
 ]

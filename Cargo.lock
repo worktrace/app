@@ -708,7 +708,4 @@ dependencies = [
 
 [[package]]
 name = "worktrace_generator"
-version = "0.1.0"
-dependencies = [
- "thiserror",
-]
+version = "0.1.1"

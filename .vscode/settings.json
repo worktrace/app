@@ -34,11 +34,13 @@
     "esbenp",
     "foxundermoon",
     "mulan",
+    "protos",
     "pubspec",
     "swiftpm",
     "symbolication",
     "tamasfe",
     "thiserror",
+    "walkdir",
     "worktrace"
   ]
 }

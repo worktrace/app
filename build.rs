@@ -23,12 +23,15 @@ use std::{
     path::{Path, PathBuf},
     slice::Iter,
 };
-use worktrace_build::{license::LicenseNotationGenerator, utils::eol};
+use worktrace_build::{
+    license::LicenseNotationGenerator, proto::update_proto_dir, utils::eol,
+};
 
 fn main() -> std::io::Result<()> {
     let root = PathBuf::from(var("CARGO_MANIFEST_DIR").unwrap());
     update_cargo_license(&root)?;
     update_assets(&root)?;
+    update_proto_dir(&root.join("proto"))?;
     Ok(())
 }
 

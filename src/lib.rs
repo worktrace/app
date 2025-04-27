@@ -1,7 +1,7 @@
 // Copyright (c) 2025-present All contributors of this project
 // All contributors are listed in CONTRIBUTORS.yaml at repository root.
 //
-// AutoStories is licensed under Mulan PSL v2.
+// WorkTrace is licensed under Mulan PSL v2.
 // You can use this software according to the terms
 // and conditions of the Mulan PSL v2.
 // You may obtain a copy of Mulan PSL v2 at:
@@ -18,5 +18,3 @@
 // === Auto generated, DO NOT EDIT ABOVE ===
 
 pub mod env;
-
-pub use worktrace_generator::license;

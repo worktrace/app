@@ -23,7 +23,7 @@ use std::{
     path::{Path, PathBuf},
     slice::Iter,
 };
-use worktrace_build::{fmt::eol, license::LicenseNotationGenerator};
+use worktrace_build::{license::LicenseNotationGenerator, utils::eol};
 
 fn main() -> std::io::Result<()> {
     let root = PathBuf::from(var("CARGO_MANIFEST_DIR").unwrap());

@@ -5,7 +5,7 @@ Build script utilities behind the WorkTrace crate. This crate is intended to be 
 1. Generate license notation from template file.
 2. Encapsulations for generating proto buffer code.
 
-劳动溯源项目的源码构建工具。此库仅用于构建脚本使用(在`build.rs`中使用，并通过`build-dependencies`引用)，并非用于直接依赖(`dependencies`)。功能如下：
+劳动溯源项目的源码构建工具。此库仅用于构建脚本使用(在`build.rs`中使用，并通过`build-dependencies`引用)，并非用于直接依赖(`dependencies`)。
 
 1. 从模板文件中生成许可证声明注释。
 2. 生成 ProtoBuffer 代码的相关封装。

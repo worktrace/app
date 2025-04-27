@@ -6,8 +6,8 @@ An application and network to trace what we've worked. This repository contains:
 2. The web-app server for local development and special platforms.
 3. The server for network sync and collaboration.
 4. The shared libraries for code reuse among multiple entries.
-5. WorkTrace multi-platform application as editor.
-6. WorkTrace website including the viewer.
+5. WorkTrace multi-platform application as editor (Flutter).
+6. WorkTrace website including the viewer (Web).
 
 劳动溯源网络平台及其开源工具库，包含：
 
@@ -15,7 +15,7 @@ An application and network to trace what we've worked. This repository contains:
 2. 本地开发及特殊平台下的局域网服务器。
 3. 同步与协作的网络服务器。
 4. 用于多入口应用代码复用的共享库。
-5. 作为编辑器的跨平台应用客户端。
+5. 作为编辑器的跨平台应用客户端(使用 Flutter 架构)。
 6. 作检索和展示的网页。
 
 > Attention! This project is still in development. For the safety of your codebase, please wait for a stable version after 1.0.0.

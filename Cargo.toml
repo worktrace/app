@@ -3,12 +3,10 @@ name = "worktrace"
 description = "An application and network to trace what we've worked."
 repository = "https://github.com/worktrace/app"
 license = "MulanPSL-2.0"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 
 include = [
-  "/generator/src",
-  "/generator/Cargo.toml",
   "/src",
   "/.license.txt",
   "/build.rs",

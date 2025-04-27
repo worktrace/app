@@ -30,7 +30,7 @@ use worktrace_build::{
 fn main() -> std::io::Result<()> {
     let root = PathBuf::from(var("CARGO_MANIFEST_DIR").unwrap());
     update_cargo_license(&root)?;
-    update_assets(&root)?;
+    update_assets(&root).ok(); // Children crates won't included in publish.
     update_proto_dir(&root.join("proto"))?;
     Ok(())
 }
@@ -44,7 +44,9 @@ fn update_cargo_license(root: &PathBuf) -> std::io::Result<()> {
         separator: "=== Auto generated, DO NOT EDIT ABOVE ===".into(),
         eol: eol::LF,
     };
-    generator.update_dir(&root.join(WORKTRACE_BUILD).join("src"))?;
+
+    // Children crates won't included in publish.
+    let _ = generator.update_dir(&root.join(WORKTRACE_BUILD).join("src"));
     generator.update_dir(&root.join("src"))?;
     generator.update_file(&root.join("build.rs"))
 }

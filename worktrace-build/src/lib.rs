@@ -17,6 +17,11 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
+#[cfg(feature = "license")]
 pub mod license;
+
+#[cfg(feature = "proto")]
 pub mod proto;
+
+#[cfg(feature = "license")]
 pub mod utils;

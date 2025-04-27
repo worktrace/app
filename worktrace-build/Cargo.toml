@@ -1,9 +1,9 @@
 [package]
-name = "worktrace_generator"
-description = "Code generating utilities for the worktrace crate."
+name = "worktrace-build"
+description = "Build script utilities behind the WorkTrace crate."
 repository = "https://github.com/worktrace/app"
 license = "MulanPSL-2.0"
-version = "0.1.1"
+version = "0.1.0"
 edition = "2024"
 include = [
   "/src",
@@ -12,10 +12,5 @@ include = [
   "/LICENSE",
   "/README.md",
 ]
-
-[lib]
-crate-type = ["lib"]
-name = "worktrace_generator"
-path = "src/lib.rs"
 
 [dependencies]

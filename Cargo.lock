@@ -703,9 +703,9 @@ dependencies = [
  "axum",
  "thiserror",
  "tokio",
- "worktrace_generator",
+ "worktrace-build",
 ]
 
 [[package]]
-name = "worktrace_generator"
-version = "0.1.1"
+name = "worktrace-build"
+version = "0.1.0"

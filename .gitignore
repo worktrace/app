@@ -9,8 +9,8 @@ Desktop.ini
 # Cargo.
 /target
 .env
-gen/CONTRIBUTORS.yaml
-gen/LICENSE
+worktrace-*/CONTRIBUTORS.yaml
+worktrace-*/LICENSE
 
 # Flutter.
 **/doc/api/

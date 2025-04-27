@@ -1,0 +1,24 @@
+[package]
+name = "worktrace-build"
+description = "Build script utilities behind the WorkTrace crate."
+repository = "https://github.com/worktrace/app"
+license = "MulanPSL-2.0"
+version = "0.1.0"
+edition = "2024"
+include = [
+  "/src",
+  "/Cargo.toml",
+  "/CONTRIBUTORS.yaml",
+  "/LICENSE",
+  "/README.md",
+]
+
+[features]
+default = ["full"]
+full = ["license", "proto"]
+license = []
+proto = ["dep:tonic-build", "dep:walkdir"]
+
+[dependencies]
+tonic-build = { version = "0.13.0", optional = true }
+walkdir = { version = "2.5.0", optional = true }

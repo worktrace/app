@@ -1,7 +1,7 @@
 // Copyright (c) 2025-present All contributors of this project
 // All contributors are listed in CONTRIBUTORS.yaml at repository root.
 //
-// AutoStories is licensed under Mulan PSL v2.
+// WorkTrace is licensed under Mulan PSL v2.
 // You can use this software according to the terms
 // and conditions of the Mulan PSL v2.
 // You may obtain a copy of Mulan PSL v2 at:
@@ -17,13 +17,16 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
-use crate::fmt::{add_line_before, eol, is_rust_file, rust_line_comment};
+use crate::utils::{add_line_before, eol, is_rust_file, rust_line_comment};
 use std::{
     fs::{read_dir, read_to_string, write},
     path::{Path, PathBuf},
 };
 
-pub fn update_cargo_license(root: &PathBuf, comment: impl AsRef<str>) -> std::io::Result<()> {
+pub fn update_cargo_license(
+    root: &PathBuf,
+    comment: impl AsRef<str>,
+) -> std::io::Result<()> {
     let generator = LicenseNotationGenerator {
         template: read_to_string(root.join(".license.txt"))?,
         comment: comment.as_ref().into(),

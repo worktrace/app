@@ -33,5 +33,7 @@ axum = "0.8.3"
 thiserror = "2.0.12"
 tokio = { version = "1.44.2", features = ["full"] }
 
-[build-dependencies]
-worktrace-build = { version = "0.1.0", path = "worktrace-build" }
+[build-dependencies.worktrace-build]
+path = "worktrace-build"
+version = "0.1.1"
+features = ["full"]

@@ -17,11 +17,4 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
-pub mod license;
-pub mod utils;
-
-#[cfg(feature = "flutter")]
-pub mod flutter;
-
-#[cfg(feature = "proto")]
-pub mod proto;
+pub fn placeholder() {}

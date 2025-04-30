@@ -19,12 +19,13 @@
 
 use std::{
     env::var,
-    fs::{copy, read_to_string},
+    fs::{copy, read_dir, read_to_string},
     path::{Path, PathBuf},
     slice::Iter,
 };
 use worktrace_build::{
-    license::LicenseNotationGenerator, proto::update_proto_dir, utils::eol,
+    license::{LicenseNotationGenerator, LicenseNotationOptions},
+    proto::update_proto_dir,
 };
 
 fn main() -> std::io::Result<()> {
@@ -38,16 +39,21 @@ fn main() -> std::io::Result<()> {
 const WORKTRACE_BUILD: &str = "worktrace-build";
 
 fn update_cargo_license(root: &PathBuf) -> std::io::Result<()> {
+    let template = read_to_string(root.join(".license.txt"))?;
     let generator = LicenseNotationGenerator {
-        template: read_to_string(root.join(".license.txt"))?,
+        template: template.as_str(),
         comment: "上述开源协议注释乃程序自动生成，请勿编辑".into(),
         separator: "=== Auto generated, DO NOT EDIT ABOVE ===".into(),
-        eol: eol::LF,
+        options: LicenseNotationOptions::rust(),
     };
 
     // Children crates won't included in publish.
-    let _ = generator.update_dir(&root.join(WORKTRACE_BUILD).join("src"));
-    generator.update_dir(&root.join("src"))?;
+    [WORKTRACE_BUILD].iter().for_each(|name| {
+        if let Ok(dir) = read_dir(root.join(name)) {
+            generator.update_dir(dir);
+        }
+    });
+    generator.update_dir(read_dir(&root.join("src"))?);
     generator.update_file(&root.join("build.rs"))
 }
 

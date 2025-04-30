@@ -22,6 +22,3 @@ pub mod license;
 
 #[cfg(feature = "proto")]
 pub mod proto;
-
-#[cfg(feature = "license")]
-pub mod utils;

@@ -26,11 +26,10 @@ pub fn update_cargo_license(
     root: &PathBuf,
     comment: impl AsRef<str>,
 ) -> std::io::Result<()> {
-    let template = read_to_string(root.join(".license.txt"))?;
     let generator = LicenseNotationGenerator {
-        template: template.as_str(),
-        comment: comment.as_ref().into(),
-        separator: "=== Auto generated, DO NOT EDIT ABOVE ===".into(),
+        template: &read_to_string(root.join(".license.txt"))?,
+        comment: comment.as_ref(),
+        separator: "=== Auto generated, DO NOT EDIT ABOVE ===",
         options: LicenseNotationOptions::rust(),
     };
     generator.update_dir(read_dir(&root.join("src"))?);
@@ -59,7 +58,7 @@ impl<'a> LicenseNotationGenerator<'a> {
 
     pub fn update_file(&self, path: &Path) -> std::io::Result<()> {
         let content = read_to_string(path)?;
-        let result = self.update(content.as_str());
+        let result = self.update(&content);
         write(path, result)
     }
 
@@ -78,7 +77,7 @@ impl<'a> LicenseNotationGenerator<'a> {
             self.options.eol,
             self.options.add_comment(self.separator),
             self.options.eol,
-            match raw.split_once(separator.as_str()) {
+            match raw.split_once(&separator) {
                 Some((_before, after)) => after.into(),
                 None => format!("{}{}", self.options.eol, raw),
             }

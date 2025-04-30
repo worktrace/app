@@ -16,11 +16,13 @@ include = [
 [features]
 default = []
 full = ["default", "flutter", "proto"]
-flutter = ["dep:saphyr", "dep:semver"]
 proto = ["dep:tonic-build", "dep:walkdir"]
+flutter = ["dep:saphyr", "dep:semver", "dep:thiserror", "dep:lazy-regex"]
 
 [dependencies]
+lazy-regex = { version = "3.4.1", optional = true }
 saphyr = { version = "0.0.4", optional = true }
 semver = { version = "1.0.26", optional = true }
+thiserror = { version = "2.0.12", optional = true }
 tonic-build = { version = "0.13.0", optional = true }
 walkdir = { version = "2.5.0", optional = true }

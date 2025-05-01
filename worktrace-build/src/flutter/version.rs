@@ -38,7 +38,6 @@ pub fn platform_flutter_version()
 }
 
 pub fn parse_flutter_version(output: &str) -> Option<(String, String)> {
-    // let separator = '\u{2022}'; // The separator used in flutter output: '•'.
     let (_, version, channel) = regex_captures!(
         r"^Flutter (\d+\.\d+\.\d+(?:-\w+)?) • channel (\w+)",
         &output

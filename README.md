@@ -18,9 +18,15 @@ An application and network to trace what we've worked. This repository contains:
 5. 作为编辑器的跨平台应用客户端(使用 Flutter 架构)。
 6. 作检索和展示的网页。
 
-> Attention! This project is still in development. For the safety of your codebase, please wait for a stable version after 1.0.0.
+> Attention! This project is still in development, and there is almost no documentation comment as guide. For the safety of your codebase, please at least wait for a stable version after 1.0.
 >
-> 注意：此库仍在频繁开发变更，为了避免技术债，请等待 1.0.0 版本稳定后再使用。
+> 注意：此库仍在频繁开发变更，文档都没写。坑多先别用，至少等到 1.0 版本后。
+
+## Contributing 贡献指南
+
+This repository is still in an early stage, and had not been prepared for contribution from the community yet. Please at least wait for the preparation of the community contributing guideline and CLA.
+
+此库尚未准备好接受社区代码贡献，请耐心等待至贡献指南和贡献者许可协议的发布。
 
 ## License 开源协议
 

@@ -3,7 +3,7 @@ name = "worktrace-build"
 description = "Build script utilities behind the WorkTrace crate."
 repository = "https://github.com/worktrace/app"
 license = "MulanPSL-2.0"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 include = [
   "/src",
@@ -14,11 +14,15 @@ include = [
 ]
 
 [features]
-default = ["full"]
-full = ["license", "proto"]
-license = []
+default = []
+full = ["default", "flutter", "proto"]
 proto = ["dep:tonic-build", "dep:walkdir"]
+flutter = ["dep:saphyr", "dep:semver", "dep:thiserror", "dep:lazy-regex"]
 
 [dependencies]
+lazy-regex = { version = "3.4.1", optional = true }
+saphyr = { version = "0.0.4", optional = true }
+semver = { version = "1.0.26", optional = true }
+thiserror = { version = "2.0.12", optional = true }
 tonic-build = { version = "0.13.0", optional = true }
 walkdir = { version = "2.5.0", optional = true }

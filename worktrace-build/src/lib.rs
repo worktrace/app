@@ -20,8 +20,5 @@
 pub mod license;
 pub mod utils;
 
-#[cfg(feature = "flutter")]
-pub mod flutter;
-
 #[cfg(feature = "proto")]
 pub mod proto;

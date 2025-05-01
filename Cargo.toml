@@ -22,7 +22,7 @@ name = "worktrace"
 path = "src/lib.rs"
 
 [[bin]]
-name = "worktrace"
+name = "worktrace_webapp"
 path = "src/main.rs"
 
 [workspace]

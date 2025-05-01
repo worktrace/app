@@ -18,7 +18,6 @@
 // === Auto generated, DO NOT EDIT ABOVE ===
 
 pub mod license;
-pub mod utils;
 
 #[cfg(feature = "proto")]
 pub mod proto;

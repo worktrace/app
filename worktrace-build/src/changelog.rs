@@ -18,10 +18,12 @@
 // === Auto generated, DO NOT EDIT ABOVE ===
 
 use std::{
-    fs::{File, read_to_string, write},
+    fs::{File, write},
     io::{BufRead, BufReader},
     path::{Path, PathBuf},
 };
+
+use crate::packages::{CargoManifestError, cargo_version};
 
 pub struct ChangelogGenerator {
     pub version: String,
@@ -39,14 +41,8 @@ impl ChangelogGenerator {
     }
 
     pub fn rust(root: &Path) -> Result<Self, CargoManifestError> {
-        let content = read_to_string(root.join("Cargo.toml"))?;
-        let manifest = toml::from_str::<toml::Value>(&content)?;
-        let version = manifest
-            .get("package")
-            .and_then(|package| package.get("version"))
-            .and_then(|version| version.as_str())
-            .ok_or(CargoManifestError::Config("package version unspecified"))?;
-        Ok(Self::default(root, version.to_string()))
+        let version = cargo_version(root)?;
+        Ok(Self::default(root, version))
     }
 
     pub fn update(&self) -> Result<(), UpdateChangelogError> {
@@ -78,16 +74,4 @@ impl ChangelogGenerator {
 pub enum UpdateChangelogError {
     #[error("cannot read file: {0}")]
     File(#[from] std::io::Error),
-}
-
-#[derive(Debug, thiserror:: Error)]
-pub enum CargoManifestError<'a> {
-    #[error("cannot read cargo manifest file: {0}")]
-    File(#[from] std::io::Error),
-
-    #[error("cannot parse toml: {0}")]
-    Syntax(#[from] toml::de::Error),
-
-    #[error("invalid cargo manifest config: {0}")]
-    Config(&'a str),
 }

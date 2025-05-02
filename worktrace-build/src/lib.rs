@@ -19,6 +19,7 @@
 
 pub mod changelog;
 pub mod license;
+pub mod packages;
 
 #[cfg(feature = "proto")]
 pub mod proto;

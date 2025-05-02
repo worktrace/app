@@ -39,9 +39,12 @@ fn main() -> std::io::Result<()> {
 }
 
 fn update_changelog(root: &Path, children: Iter<impl AsRef<str>>) {
+    if let Ok(generator) = ChangelogGenerator::cargo(&root) {
+        generator.update().ok();
+    }
     for child in children {
         let path = root.join(child.as_ref());
-        if let Ok(generator) = ChangelogGenerator::rust(&path) {
+        if let Ok(generator) = ChangelogGenerator::cargo(&path) {
             generator.update().ok();
         }
     }

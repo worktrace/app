@@ -40,9 +40,22 @@ impl ChangelogGenerator {
         }
     }
 
-    pub fn rust(root: &Path) -> Result<Self, CargoManifestError> {
+    pub fn named(root: &Path, name: &str, version: String) -> Self {
+        Self {
+            version,
+            source: root.join(name),
+            target: root.join(format!(".{}", name.to_lowercase())),
+        }
+    }
+
+    pub fn cargo(root: &Path) -> Result<Self, CargoManifestError> {
         let version = cargo_version(root)?;
         Ok(Self::default(root, version))
+    }
+
+    pub fn cargo_named(root: &Path) -> Result<Self, CargoManifestError> {
+        let version = cargo_version(root)?;
+        Ok(Self::named(root, "changelog.rs.md", version))
     }
 
     pub fn update(&self) -> std::io::Result<()> {

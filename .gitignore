@@ -9,6 +9,8 @@ Desktop.ini
 # Cargo.
 /target
 .env
+.changelog.md
+.changelog.*.md
 worktrace-*/CONTRIBUTORS.yaml
 worktrace-*/LICENSE
 

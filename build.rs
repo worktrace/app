@@ -19,56 +19,59 @@
 
 use std::{
     env::var,
-    fs::{copy, read_dir, read_to_string},
+    fs::copy,
     path::{Path, PathBuf},
     slice::Iter,
 };
 use worktrace_build::{
-    license::{LicenseNotationGenerator, LicenseNotationOptions},
+    changelog::ChangelogGenerator, license::LicenseNotationGenerator,
     proto::update_proto_dir,
 };
 
 fn main() -> std::io::Result<()> {
     let root = PathBuf::from(var("CARGO_MANIFEST_DIR").unwrap());
-    update_cargo_license(&root)?;
-    update_assets(&root).ok(); // Children crates won't included in publish.
+    let children = ["worktrace-build"];
+    update_changelog(&root, children.iter());
+    update_assets(&root, children.iter())?;
     update_proto_dir(&root.join("proto"))?;
+    update_license_notation(&root, children.iter())?;
     Ok(())
 }
 
-const WORKTRACE_BUILD: &str = "worktrace-build";
-
-fn update_cargo_license(root: &PathBuf) -> std::io::Result<()> {
-    let template = read_to_string(root.join(".license.txt"))?;
-    let generator = LicenseNotationGenerator {
-        template: template.as_str(),
-        comment: "上述开源协议注释乃程序自动生成，请勿编辑".into(),
-        separator: "=== Auto generated, DO NOT EDIT ABOVE ===".into(),
-        options: LicenseNotationOptions::rust(),
-    };
-
-    // Children crates won't included in publish.
-    [WORKTRACE_BUILD].iter().for_each(|name| {
-        if let Ok(dir) = read_dir(root.join(name)) {
-            generator.update_dir(dir);
-        }
-    });
-    generator.update_dir(read_dir(&root.join("src"))?);
-    generator.update_file(&root.join("build.rs"))
-}
-
-fn update_assets(root: &PathBuf) -> std::io::Result<()> {
-    let files = ["LICENSE", "CONTRIBUTORS.yaml"].iter();
-    copy_assets(&files, &root, &root.join(WORKTRACE_BUILD))
-}
-
-fn copy_assets(
-    files: &Iter<impl AsRef<Path>>,
-    src: &PathBuf,
-    out: &PathBuf,
-) -> std::io::Result<()> {
-    for name in files.as_slice() {
-        copy(src.join(name), out.join(name))?;
+fn update_changelog(root: &Path, children: Iter<impl AsRef<str>>) {
+    if let Ok(generator) = ChangelogGenerator::cargo(&root) {
+        generator.update().ok();
     }
+    for child in children {
+        let path = root.join(child.as_ref());
+        if let Ok(generator) = ChangelogGenerator::cargo(&path) {
+            generator.update().ok();
+        }
+    }
+}
+
+fn update_assets(
+    root: &Path,
+    children: Iter<impl AsRef<str>>,
+) -> std::io::Result<()> {
+    let files = ["LICENSE", "CONTRIBUTORS.yaml"];
+    let children = children
+        .map(|child| root.join(child.as_ref()))
+        .filter(|child| child.exists());
+    for child in children {
+        for file in files.iter() {
+            copy(root.join(file), child.join(file))?;
+        }
+    }
+    Ok(())
+}
+
+fn update_license_notation(
+    root: &Path,
+    children: Iter<impl AsRef<str>>,
+) -> std::io::Result<()> {
+    const COMMENT: &str = "上述开源协议注释乃程序自动生成，请勿编辑";
+    let generator = LicenseNotationGenerator::cargo(root, COMMENT)?;
+    generator.update_cargo(root, children);
     Ok(())
 }

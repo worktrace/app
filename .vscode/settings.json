@@ -26,6 +26,14 @@
     "LICENSE": "plaintext"
   },
 
+  // File nesting patterns (enable as you wish).
+  "explorer.fileNesting.patterns": {
+    "pubspec.yaml": "pubspec.lock,.metadata",
+    "Cargo.toml": "Cargo.lock",
+    "readme.md": "license, contributors.yaml",
+    "changelog.md": ".changelog.md, .changelog.*.md, changelog.*.md"
+  },
+
   // Spell checker special words and check (requires recommended extension).
   "cSpell.ignorePaths": [".git", ".dart_tool", "target", "CONTRIBUTORS.yaml"],
   "cSpell.words": [
@@ -37,6 +45,7 @@
     "protos",
     "pubspec",
     "saphyr",
+    "serde",
     "swiftpm",
     "symbolication",
     "tamasfe",

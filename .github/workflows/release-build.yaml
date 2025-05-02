@@ -1,0 +1,22 @@
+name: release-build
+
+on:
+  push: { tags: ["build-v[0-9]+.[0-9]+.[0-9]+*"] }
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env: { GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}" }
+    permissions: { id-token: write, contents: write }
+    steps:
+      - uses: actions/checkout@v4
+      - name: install proto compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y protobuf-compiler
+
+      - run: cargo build
+      - name: create release
+        run: "gh release create ${{ github.ref_name }} \
+          --title ${{ github.ref_name }} \
+          --notes-file worktrace-build/.changelog.md"

@@ -45,7 +45,7 @@ impl ChangelogGenerator {
         Ok(Self::default(root, version))
     }
 
-    pub fn update(&self) -> Result<(), UpdateChangelogError> {
+    pub fn update(&self) -> std::io::Result<()> {
         let reader = BufReader::new(File::open(&self.source)?);
         let title = format!("## {}", self.version);
         let mut inside = false;
@@ -68,10 +68,4 @@ impl ChangelogGenerator {
         write(&self.target, handler)?;
         Ok(())
     }
-}
-
-#[derive(Debug, thiserror::Error)]
-pub enum UpdateChangelogError {
-    #[error("cannot read file: {0}")]
-    File(#[from] std::io::Error),
 }

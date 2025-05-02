@@ -43,7 +43,7 @@ pub struct LicenseNotationGenerator<'a> {
     pub options: LicenseNotationOptions<'a>,
 }
 
-impl<'a> LicenseNotationGenerator<'a> {
+impl LicenseNotationGenerator<'_> {
     pub fn update_dir(&self, root: ReadDir) {
         root.filter_map(|entry| entry.ok())
             .map(|entry| entry.path())
@@ -92,8 +92,8 @@ pub struct LicenseNotationOptions<'a> {
     pub file_extension: &'a str,
 }
 
-impl<'a> LicenseNotationOptions<'a> {
-    pub fn rust() -> LicenseNotationOptions<'static> {
+impl LicenseNotationOptions<'_> {
+    pub fn rust() -> Self {
         LicenseNotationOptions {
             eol: "\n",
             comment_prefix: "//",

@@ -32,14 +32,11 @@ fn main() -> std::io::Result<()> {
     let root = PathBuf::from(var("CARGO_MANIFEST_DIR").unwrap());
     let children = ["worktrace-build"];
     update_changelog(&root, children.iter());
-    update_license_notation(&root, children.iter())?;
-
-    update_assets(&root).ok(); // Children crates won't included in publish.
+    update_assets(&root, children.iter())?;
     update_proto_dir(&root.join("proto"))?;
+    update_license_notation(&root, children.iter())?;
     Ok(())
 }
-
-const WORKTRACE_BUILD: &str = "worktrace-build";
 
 fn update_changelog(root: &Path, children: Iter<impl AsRef<str>>) {
     for child in children {
@@ -50,6 +47,22 @@ fn update_changelog(root: &Path, children: Iter<impl AsRef<str>>) {
     }
 }
 
+fn update_assets(
+    root: &Path,
+    children: Iter<impl AsRef<str>>,
+) -> std::io::Result<()> {
+    let files = ["LICENSE", "CONTRIBUTORS.yaml"];
+    let children = children
+        .map(|child| root.join(child.as_ref()))
+        .filter(|child| child.exists());
+    for child in children {
+        for file in files.iter() {
+            copy(root.join(file), child.join(file))?;
+        }
+    }
+    Ok(())
+}
+
 fn update_license_notation(
     root: &Path,
     children: Iter<impl AsRef<str>>,
@@ -57,21 +70,5 @@ fn update_license_notation(
     const COMMENT: &str = "上述开源协议注释乃程序自动生成，请勿编辑";
     let generator = LicenseNotationGenerator::cargo(root, COMMENT)?;
     generator.update_cargo(root, children);
-    Ok(())
-}
-
-fn update_assets(root: &PathBuf) -> std::io::Result<()> {
-    let files = ["LICENSE", "CONTRIBUTORS.yaml"].iter();
-    copy_assets(&files, &root, &root.join(WORKTRACE_BUILD))
-}
-
-fn copy_assets(
-    files: &Iter<impl AsRef<Path>>,
-    src: &PathBuf,
-    out: &PathBuf,
-) -> std::io::Result<()> {
-    for name in files.as_slice() {
-        copy(src.join(name), out.join(name))?;
-    }
     Ok(())
 }

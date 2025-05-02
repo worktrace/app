@@ -19,11 +19,11 @@
 
 use std::{
     fs::{ReadDir, read_dir, read_to_string, write},
-    path::{Path, PathBuf},
+    path::Path,
 };
 
 pub fn update_cargo_license(
-    root: &PathBuf,
+    root: &Path,
     comment: impl AsRef<str>,
 ) -> std::io::Result<()> {
     let generator = LicenseNotationGenerator {

@@ -17,11 +17,10 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
-use std::path::PathBuf;
-
+use std::path::Path;
 use walkdir::WalkDir;
 
-pub fn update_proto_dir(root: &PathBuf) -> std::io::Result<()> {
+pub fn update_proto_dir(root: &Path) -> std::io::Result<()> {
     let proto_files_paths = WalkDir::new(root)
         .into_iter()
         .filter_map(|entry| entry.ok())

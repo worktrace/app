@@ -20,30 +20,43 @@
 use std::{
     fs::{ReadDir, read_dir, read_to_string, write},
     path::Path,
+    slice::Iter,
 };
 
-pub fn update_cargo_license(
-    root: &Path,
-    comment: impl AsRef<str>,
-) -> std::io::Result<()> {
-    let generator = LicenseNotationGenerator {
-        template: &read_to_string(root.join(".license.txt"))?,
-        comment: comment.as_ref(),
-        separator: "=== Auto generated, DO NOT EDIT ABOVE ===",
-        options: LicenseNotationOptions::rust(),
-    };
-    generator.update_dir(read_dir(&root.join("src"))?);
-    generator.update_file(&root.join("build.rs"))
-}
-
 pub struct LicenseNotationGenerator<'a> {
-    pub template: &'a str,
-    pub comment: &'a str,
-    pub separator: &'a str,
+    pub template: String,
+    pub comment: String,
+    pub separator: String,
     pub options: LicenseNotationOptions<'a>,
 }
 
 impl LicenseNotationGenerator<'_> {
+    pub fn cargo(
+        root: &Path,
+        comment: impl AsRef<str>,
+    ) -> std::io::Result<Self> {
+        Ok(LicenseNotationGenerator {
+            template: read_to_string(root.join(".license.txt"))?,
+            comment: comment.as_ref().to_string(),
+            separator: "=== Auto generated, DO NOT EDIT ABOVE ===".to_string(),
+            options: LicenseNotationOptions::rust(),
+        })
+    }
+
+    pub fn update_cargo(&self, root: &Path, children: Iter<impl AsRef<str>>) {
+        self.update_file(&root.join("build.rs")).ok();
+        if let Ok(dir) = read_dir(root.join("src")) {
+            self.update_dir(dir)
+        }
+        for child in children {
+            let path = root.join(child.as_ref());
+            self.update_file(&path.join("build.rs")).ok();
+            if let Ok(dir) = read_dir(path.join("src")) {
+                self.update_dir(dir)
+            }
+        }
+    }
+
     pub fn update_dir(&self, root: ReadDir) {
         root.filter_map(|entry| entry.ok())
             .map(|entry| entry.path())
@@ -66,16 +79,16 @@ impl LicenseNotationGenerator<'_> {
         let separator = format!(
             "{}{}{}",
             self.options.eol,
-            self.options.add_comment(self.separator),
+            self.options.add_comment(&self.separator),
             self.options.eol,
         );
         format!(
             "{}{}{}{}{}{}{}",
-            self.options.add_comment(self.template),
+            self.options.add_comment(&self.template),
             self.options.eol,
-            self.options.add_comment(self.comment),
+            self.options.add_comment(&self.comment),
             self.options.eol,
-            self.options.add_comment(self.separator),
+            self.options.add_comment(&self.separator),
             self.options.eol,
             match raw.split_once(&separator) {
                 Some((_before, after)) => after.into(),

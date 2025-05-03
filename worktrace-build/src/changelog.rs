@@ -62,7 +62,9 @@ impl ChangelogGenerator {
         let reader = BufReader::new(File::open(&self.source)?);
         let title = format!("## {}", self.version);
         let mut inside = false;
-        let mut handler = String::new();
+        let mut handler = String::from(
+            "<!-- Auto generated changelog of current version. -->\n",
+        );
         for line in reader.lines() {
             let line = line?;
             match inside {

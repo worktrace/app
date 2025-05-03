@@ -27,7 +27,7 @@ pub fn crate_root() -> Result<PathBuf, VarError> {
     Ok(PathBuf::from(var("CARGO_MANIFEST_DIR")?))
 }
 
-pub fn cargo_version(root: &Path) -> Result<String, CargoManifestError> {
+pub fn crate_version(root: &Path) -> Result<String, CargoManifestError> {
     let content = read_to_string(root.join("Cargo.toml"))?;
     let manifest = toml::from_str::<toml::Value>(&content)?;
     let version = manifest

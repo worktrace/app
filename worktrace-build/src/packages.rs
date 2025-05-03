@@ -17,7 +17,15 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
-use std::{fs::read_to_string, path::Path};
+use std::{
+    env::{VarError, var},
+    fs::read_to_string,
+    path::{Path, PathBuf},
+};
+
+pub fn crate_root() -> Result<PathBuf, VarError> {
+    Ok(PathBuf::from(var("CARGO_MANIFEST_DIR")?))
+}
 
 pub fn cargo_version(root: &Path) -> Result<String, CargoManifestError> {
     let content = read_to_string(root.join("Cargo.toml"))?;

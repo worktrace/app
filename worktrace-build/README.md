@@ -14,6 +14,6 @@ Build script utilities behind the [WorkTrace](https://crates.io/crates/worktrace
 
 ## License 开源协议
 
-WorkTrace is licensed under [Mulan PSL v2](http://license.coscl.org.cn/MulanPSL2). You can find the license text in the [LICENSE](../LICENSE) file, and all contributors are listed in [CONTRIBUTORS.yaml](../CONTRIBUTORS.yaml). The Mulan Permissive Software License is a free and concise license like MIT or Apache2.0, but more friendly to the developers in China.
+WorkTrace is licensed under [Mulan PSL v2](http://license.coscl.org.cn/MulanPSL2). You can find the license text in the [LICENSE](../LICENSE) file, and all contributors are listed in [CONTRIBUTORS.yaml](../CONTRIBUTORS.yaml).
 
 本库以木兰宽松协议开源。您可以在 [LICENSE](../LICENSE) 文件中找到协议文本，所有贡献者名单在 [CONTRIBUTORS.yaml](../CONTRIBUTORS.yaml) 中。

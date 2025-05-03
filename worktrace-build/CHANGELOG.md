@@ -1,3 +1,13 @@
+## 0.3.0
+
+- feat: get current crate path.
+- feat: add comment notation for auto generated changelog.
+- perf!: rename `fn cargo_version` to `fn crate_version`.
+<!-- sep -->
+- 增：获取当前包根路径。
+- 增：自动生成更改日志添加说明注释。
+- 革：重命名 `fn cargo_version` 为 `fn crate_version`。
+
 ## 0.2.0
 
 - feat: update changelog of current version (usually used for release).

@@ -17,19 +17,14 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
-use std::{
-    env::var,
-    fs::copy,
-    path::{Path, PathBuf},
-    slice::Iter,
-};
+use std::{fs::copy, path::Path, slice::Iter};
 use worktrace_build::{
     changelog::ChangelogGenerator, license::LicenseNotationGenerator,
-    proto::update_proto_dir,
+    packages::crate_root, proto::update_proto_dir,
 };
 
 fn main() -> std::io::Result<()> {
-    let root = PathBuf::from(var("CARGO_MANIFEST_DIR").unwrap());
+    let root = crate_root().unwrap();
     let children = ["worktrace-build"];
     update_changelog(&root, children.iter());
     update_assets(&root, children.iter())?;

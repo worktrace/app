@@ -1064,7 +1064,7 @@ dependencies = [
 
 [[package]]
 name = "worktrace-build"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "thiserror",
  "toml",

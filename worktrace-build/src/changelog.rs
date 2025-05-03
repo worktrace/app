@@ -23,7 +23,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use crate::packages::{CargoManifestError, cargo_version};
+use crate::packages::{CargoManifestError, crate_version};
 
 pub struct ChangelogGenerator {
     pub version: String,
@@ -49,12 +49,12 @@ impl ChangelogGenerator {
     }
 
     pub fn cargo(root: &Path) -> Result<Self, CargoManifestError> {
-        let version = cargo_version(root)?;
+        let version = crate_version(root)?;
         Ok(Self::default(root, version))
     }
 
     pub fn cargo_named(root: &Path) -> Result<Self, CargoManifestError> {
-        let version = cargo_version(root)?;
+        let version = crate_version(root)?;
         Ok(Self::named(root, "changelog.rs.md", version))
     }
 
@@ -62,7 +62,9 @@ impl ChangelogGenerator {
         let reader = BufReader::new(File::open(&self.source)?);
         let title = format!("## {}", self.version);
         let mut inside = false;
-        let mut handler = String::new();
+        let mut handler = String::from(
+            "<!-- Auto generated changelog of current version. -->\n",
+        );
         for line in reader.lines() {
             let line = line?;
             match inside {

@@ -17,5 +17,13 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
-pub mod env;
-pub mod terminal;
+pub struct TerminalFont {
+    pub code: String,
+    pub reset_code: String,
+}
+
+impl TerminalFont {
+    pub fn decorate(&self, raw: impl AsRef<str>) -> String {
+        format!("{}{}{}", self.code, raw.as_ref(), self.reset_code)
+    }
+}

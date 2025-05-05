@@ -23,6 +23,7 @@ pub struct TerminalFont<'a> {
 }
 
 impl TerminalFont<'_> {
+    #[inline]
     pub fn wrap(&self, raw: impl AsRef<str>) -> String {
         format!("{}{}{}", self.code, raw.as_ref(), self.reset_code)
     }
@@ -30,7 +31,7 @@ impl TerminalFont<'_> {
     pub fn render(&self, raw: impl AsRef<str>) -> String {
         let raw = raw.as_ref();
         match raw.split_once(&self.reset_code) {
-            None => format!("{}{}{}", self.code, raw, self.reset_code),
+            None => self.wrap(raw),
             Some((before, after)) => format!(
                 "{}{}{}{}{}",
                 self.code, before, self.code, after, self.reset_code

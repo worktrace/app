@@ -25,6 +25,12 @@ pub use build_in::*;
 pub use custom::*;
 pub use shared::*;
 
-pub trait WrapTerminalColor: WrapBasicTerminalColor {}
+pub trait WrapTerminalColor:
+    WrapBasicTerminalColor + WrapCustomTerminalColor
+{
+}
 
-pub trait RenderTerminalColor: RenderBasicTerminalColor {}
+pub trait RenderTerminalColor:
+    RenderBasicTerminalColor + RenderCustomTerminalColor
+{
+}

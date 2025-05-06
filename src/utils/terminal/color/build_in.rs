@@ -116,3 +116,147 @@ pub const HI_WHITE: BasicTerminalColor = BasicTerminalColor {
     foreground: "\x1b[97m",
     background: "\x1b[107m",
 };
+
+pub trait WrapBasicTerminalColor:
+    WrapBasicTerminalColorNormal
+    + WrapBasicTerminalColorHi
+    + WrapBasicTerminalColorBg
+    + WrapBasicTerminalColorHiBg
+{
+}
+
+pub trait WrapBasicTerminalColorNormal: AsRef<str> {
+    fn black(&self) -> String {
+        BLACK.wrap_foreground(self)
+    }
+
+    fn red(&self) -> String {
+        RED.wrap_foreground(self)
+    }
+
+    fn green(&self) -> String {
+        GREEN.wrap_foreground(self)
+    }
+
+    fn yellow(&self) -> String {
+        YELLOW.wrap_foreground(self)
+    }
+
+    fn blue(&self) -> String {
+        BLUE.wrap_foreground(self)
+    }
+
+    fn magenta(&self) -> String {
+        MAGENTA.wrap_foreground(self)
+    }
+
+    fn cyan(&self) -> String {
+        CYAN.wrap_foreground(self)
+    }
+
+    fn white(&self) -> String {
+        WHITE.wrap_foreground(self)
+    }
+}
+
+pub trait WrapBasicTerminalColorHi: AsRef<str> {
+    fn hi_black(&self) -> String {
+        HI_BLACK.wrap_foreground(self)
+    }
+
+    fn hi_red(&self) -> String {
+        HI_RED.wrap_foreground(self)
+    }
+
+    fn hi_green(&self) -> String {
+        HI_GREEN.wrap_foreground(self)
+    }
+
+    fn hi_yellow(&self) -> String {
+        HI_YELLOW.wrap_foreground(self)
+    }
+
+    fn hi_blue(&self) -> String {
+        HI_BLUE.wrap_foreground(self)
+    }
+
+    fn hi_magenta(&self) -> String {
+        HI_MAGENTA.wrap_foreground(self)
+    }
+
+    fn hi_cyan(&self) -> String {
+        HI_CYAN.wrap_foreground(self)
+    }
+
+    fn hi_white(&self) -> String {
+        HI_WHITE.wrap_foreground(self)
+    }
+}
+
+pub trait WrapBasicTerminalColorBg: AsRef<str> {
+    fn black_bg(&self) -> String {
+        BLACK.wrap_background(self)
+    }
+
+    fn red_bg(&self) -> String {
+        RED.wrap_background(self)
+    }
+
+    fn green_bg(&self) -> String {
+        GREEN.wrap_background(self)
+    }
+
+    fn yellow_bg(&self) -> String {
+        YELLOW.wrap_background(self)
+    }
+
+    fn blue_bg(&self) -> String {
+        BLUE.wrap_background(self)
+    }
+
+    fn magenta_bg(&self) -> String {
+        MAGENTA.wrap_background(self)
+    }
+
+    fn cyan_bg(&self) -> String {
+        CYAN.wrap_background(self)
+    }
+
+    fn white_bg(&self) -> String {
+        WHITE.wrap_background(self)
+    }
+}
+
+pub trait WrapBasicTerminalColorHiBg: AsRef<str> {
+    fn hi_black_bg(&self) -> String {
+        HI_BLACK.wrap_background(self)
+    }
+
+    fn hi_red_bg(&self) -> String {
+        HI_RED.wrap_background(self)
+    }
+
+    fn hi_green_bg(&self) -> String {
+        HI_GREEN.wrap_background(self)
+    }
+
+    fn hi_yellow_bg(&self) -> String {
+        HI_YELLOW.wrap_background(self)
+    }
+
+    fn hi_blue_bg(&self) -> String {
+        HI_BLUE.wrap_background(self)
+    }
+
+    fn hi_magenta_bg(&self) -> String {
+        HI_MAGENTA.wrap_background(self)
+    }
+
+    fn hi_cyan_bg(&self) -> String {
+        HI_CYAN.wrap_background(self)
+    }
+
+    fn hi_white_bg(&self) -> String {
+        HI_WHITE.wrap_background(self)
+    }
+}

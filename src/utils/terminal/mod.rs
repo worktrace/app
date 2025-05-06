@@ -19,3 +19,5 @@
 
 pub mod color;
 pub mod font;
+
+pub use font::{RenderTerminalFont, WrapTerminalFont};

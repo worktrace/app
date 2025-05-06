@@ -89,3 +89,87 @@ pub const DOUBLE_UNDERLINE: TerminalFont = TerminalFont {
     code: "\x1b[21m",
     reset_code: "\x1b[24m",
 };
+
+pub trait WrapTerminalFont: AsRef<str> {
+    fn bold(&self) -> String {
+        BOLD.wrap(self)
+    }
+
+    fn faint(&self) -> String {
+        FAINT.wrap(self)
+    }
+
+    fn italic(&self) -> String {
+        ITALIC.wrap(self)
+    }
+
+    fn underline(&self) -> String {
+        UNDERLINE.wrap(self)
+    }
+
+    fn blink(&self) -> String {
+        BLINK.wrap(self)
+    }
+
+    fn blink_rapid(&self) -> String {
+        BLINK_RAPID.wrap(self)
+    }
+
+    fn negative(&self) -> String {
+        NEGATIVE.wrap(self)
+    }
+
+    fn conceal(&self) -> String {
+        CONCEAL.wrap(self)
+    }
+
+    fn strikethrough(&self) -> String {
+        STRIKETHROUGH.wrap(self)
+    }
+
+    fn double_underline(&self) -> String {
+        DOUBLE_UNDERLINE.wrap(self)
+    }
+}
+
+pub trait RenderTerminalFont: AsRef<str> {
+    fn render_bold(&self) -> String {
+        BOLD.render(self)
+    }
+
+    fn render_faint(&self) -> String {
+        FAINT.render(self)
+    }
+
+    fn render_italic(&self) -> String {
+        ITALIC.render(self)
+    }
+
+    fn render_underline(&self) -> String {
+        UNDERLINE.render(self)
+    }
+
+    fn render_blink(&self) -> String {
+        BLINK.render(self)
+    }
+
+    fn render_blink_rapid(&self) -> String {
+        BLINK_RAPID.render(self)
+    }
+
+    fn render_negative(&self) -> String {
+        NEGATIVE.render(self)
+    }
+
+    fn render_conceal(&self) -> String {
+        CONCEAL.render(self)
+    }
+
+    fn render_strikethrough(&self) -> String {
+        STRIKETHROUGH.render(self)
+    }
+
+    fn render_double_underline(&self) -> String {
+        DOUBLE_UNDERLINE.render(self)
+    }
+}

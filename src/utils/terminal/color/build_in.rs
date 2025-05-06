@@ -260,3 +260,147 @@ pub trait WrapBasicTerminalColorHiBg: AsRef<str> {
         HI_WHITE.wrap_background(self)
     }
 }
+
+pub trait RenderBasicTerminalColor:
+    RenderBasicTerminalColorNormal
+    + RenderBasicTerminalColorBg
+    + RenderBasicTerminalColorHi
+    + RenderBasicTerminalColorHiBg
+{
+}
+
+pub trait RenderBasicTerminalColorNormal: AsRef<str> {
+    fn render_black(&self) -> String {
+        BLACK.render_foreground(self)
+    }
+
+    fn render_red(&self) -> String {
+        RED.render_foreground(self)
+    }
+
+    fn render_green(&self) -> String {
+        GREEN.render_foreground(self)
+    }
+
+    fn render_yellow(&self) -> String {
+        YELLOW.render_foreground(self)
+    }
+
+    fn render_blue(&self) -> String {
+        BLUE.render_foreground(self)
+    }
+
+    fn render_magenta(&self) -> String {
+        MAGENTA.render_foreground(self)
+    }
+
+    fn render_cyan(&self) -> String {
+        CYAN.render_foreground(self)
+    }
+
+    fn render_white(&self) -> String {
+        WHITE.render_foreground(self)
+    }
+}
+
+pub trait RenderBasicTerminalColorBg: AsRef<str> {
+    fn render_black_bg(&self) -> String {
+        BLACK.render_background(self)
+    }
+
+    fn render_red_bg(&self) -> String {
+        RED.render_background(self)
+    }
+
+    fn render_green_bg(&self) -> String {
+        GREEN.render_background(self)
+    }
+
+    fn render_yellow_bg(&self) -> String {
+        YELLOW.render_background(self)
+    }
+
+    fn render_blue_bg(&self) -> String {
+        BLUE.render_background(self)
+    }
+
+    fn render_magenta_bg(&self) -> String {
+        MAGENTA.render_background(self)
+    }
+
+    fn render_cyan_bg(&self) -> String {
+        CYAN.render_background(self)
+    }
+
+    fn render_white_bg(&self) -> String {
+        WHITE.render_background(self)
+    }
+}
+
+pub trait RenderBasicTerminalColorHi: AsRef<str> {
+    fn render_hi_black(&self) -> String {
+        HI_BLACK.render_foreground(self)
+    }
+
+    fn render_hi_red(&self) -> String {
+        HI_RED.render_foreground(self)
+    }
+
+    fn render_hi_green(&self) -> String {
+        HI_GREEN.render_foreground(self)
+    }
+
+    fn render_hi_yellow(&self) -> String {
+        HI_YELLOW.render_foreground(self)
+    }
+
+    fn render_hi_blue(&self) -> String {
+        HI_BLUE.render_foreground(self)
+    }
+
+    fn render_hi_magenta(&self) -> String {
+        HI_MAGENTA.render_foreground(self)
+    }
+
+    fn render_hi_cyan(&self) -> String {
+        HI_CYAN.render_foreground(self)
+    }
+
+    fn render_hi_white(&self) -> String {
+        HI_WHITE.render_foreground(self)
+    }
+}
+
+pub trait RenderBasicTerminalColorHiBg: AsRef<str> {
+    fn render_hi_black_bg(&self) -> String {
+        HI_BLACK.render_background(self)
+    }
+
+    fn render_hi_red_bg(&self) -> String {
+        HI_RED.render_background(self)
+    }
+
+    fn render_hi_green_bg(&self) -> String {
+        HI_GREEN.render_background(self)
+    }
+
+    fn render_hi_yellow_bg(&self) -> String {
+        HI_YELLOW.render_background(self)
+    }
+
+    fn render_hi_blue_bg(&self) -> String {
+        HI_BLUE.render_background(self)
+    }
+
+    fn render_hi_magenta_bg(&self) -> String {
+        HI_MAGENTA.render_background(self)
+    }
+
+    fn render_hi_cyan_bg(&self) -> String {
+        HI_CYAN.render_background(self)
+    }
+
+    fn render_hi_white_bg(&self) -> String {
+        HI_WHITE.render_background(self)
+    }
+}

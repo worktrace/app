@@ -24,3 +24,7 @@ mod shared;
 pub use build_in::*;
 pub use custom::*;
 pub use shared::*;
+
+pub trait WrapTerminalColor: WrapBasicTerminalColor {}
+
+pub trait RenderTerminalColor: RenderBasicTerminalColor {}

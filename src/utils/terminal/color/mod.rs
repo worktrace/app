@@ -17,6 +17,20 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
-pub mod utils;
+mod build_in;
+mod custom;
+mod shared;
 
-pub use utils::*;
+pub use build_in::*;
+pub use custom::*;
+pub use shared::*;
+
+pub trait WrapTerminalColor:
+    WrapBasicTerminalColor + WrapCustomTerminalColor
+{
+}
+
+pub trait RenderTerminalColor:
+    RenderBasicTerminalColor + RenderCustomTerminalColor
+{
+}

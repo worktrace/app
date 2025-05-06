@@ -17,6 +17,5 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
-pub mod utils;
-
-pub use utils::*;
+pub mod env;
+pub mod terminal;

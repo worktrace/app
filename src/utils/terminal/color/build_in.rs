@@ -17,65 +17,8 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
+use super::TerminalColorUsages;
 use std::fmt::Display;
-
-pub mod reset_code {
-    pub const FOREGROUND: &str = "\x1b[39m";
-    pub const BACKGROUND: &str = "\x1b[49m";
-}
-
-pub trait TerminalColorUsages {
-    fn foreground(&self) -> impl Display;
-    fn background(&self) -> impl Display;
-
-    #[inline]
-    fn wrap_foreground(&self, raw: impl AsRef<str>) -> String {
-        format!(
-            "{}{}{}",
-            self.foreground(),
-            raw.as_ref(),
-            reset_code::FOREGROUND
-        )
-    }
-
-    #[inline]
-    fn wrap_background(&self, raw: impl AsRef<str>) -> String {
-        format!(
-            "{}{}{}",
-            self.background(),
-            raw.as_ref(),
-            reset_code::BACKGROUND
-        )
-    }
-
-    fn render_foreground(&self, raw: impl AsRef<str>) -> String {
-        match raw.as_ref().split_once(reset_code::FOREGROUND) {
-            None => self.wrap_foreground(raw),
-            Some((before, after)) => format!(
-                "{}{}{}{}{}",
-                self.foreground(),
-                before,
-                self.foreground(),
-                after,
-                reset_code::FOREGROUND
-            ),
-        }
-    }
-
-    fn render_background(&self, raw: impl AsRef<str>) -> String {
-        match raw.as_ref().split_once(reset_code::BACKGROUND) {
-            None => self.wrap_background(raw),
-            Some((before, after)) => format!(
-                "{}{}{}{}{}",
-                self.background(),
-                before,
-                self.background(),
-                after,
-                reset_code::BACKGROUND
-            ),
-        }
-    }
-}
 
 pub struct BasicTerminalColor<'a> {
     pub foreground: &'a str,
@@ -173,36 +116,3 @@ pub const HI_WHITE: BasicTerminalColor = BasicTerminalColor {
     foreground: "\x1b[97m",
     background: "\x1b[107m",
 };
-
-pub struct TerminalColor {
-    pub foreground: String,
-    pub background: String,
-}
-
-impl TerminalColor {
-    pub fn from_code(code: u8) -> Self {
-        Self {
-            foreground: format!("\x1b[38;5;{}m", code),
-            background: format!("\x1b[48;5;{}m", code),
-        }
-    }
-
-    pub fn from_rgb(red: u8, green: u8, blue: u8) -> Self {
-        Self {
-            foreground: format!("\x1b[38;2;{};{};{}m", red, green, blue),
-            background: format!("\x1b[48;2;{};{};{}m", red, green, blue),
-        }
-    }
-}
-
-impl TerminalColorUsages for TerminalColor {
-    #[inline]
-    fn foreground(&self) -> impl Display {
-        &self.foreground
-    }
-
-    #[inline]
-    fn background(&self) -> impl Display {
-        &self.background
-    }
-}

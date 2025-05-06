@@ -17,9 +17,64 @@
 // 上述开源协议注释乃程序自动生成，请勿编辑
 // === Auto generated, DO NOT EDIT ABOVE ===
 
+use std::fmt::Display;
+
 pub mod reset_code {
     pub const FOREGROUND: &str = "\x1b[39m";
     pub const BACKGROUND: &str = "\x1b[49m";
+}
+
+pub trait TerminalColorUsages {
+    fn foreground(&self) -> impl Display;
+    fn background(&self) -> impl Display;
+
+    #[inline]
+    fn wrap_foreground(&self, raw: impl AsRef<str>) -> String {
+        format!(
+            "{}{}{}",
+            self.foreground(),
+            raw.as_ref(),
+            reset_code::FOREGROUND
+        )
+    }
+
+    #[inline]
+    fn wrap_background(&self, raw: impl AsRef<str>) -> String {
+        format!(
+            "{}{}{}",
+            self.background(),
+            raw.as_ref(),
+            reset_code::BACKGROUND
+        )
+    }
+
+    fn render_foreground(&self, raw: impl AsRef<str>) -> String {
+        match raw.as_ref().split_once(reset_code::FOREGROUND) {
+            None => self.wrap_foreground(raw),
+            Some((before, after)) => format!(
+                "{}{}{}{}{}",
+                self.foreground(),
+                before,
+                self.foreground(),
+                after,
+                reset_code::FOREGROUND
+            ),
+        }
+    }
+
+    fn render_background(&self, raw: impl AsRef<str>) -> String {
+        match raw.as_ref().split_once(reset_code::BACKGROUND) {
+            None => self.wrap_background(raw),
+            Some((before, after)) => format!(
+                "{}{}{}{}{}",
+                self.background(),
+                before,
+                self.background(),
+                after,
+                reset_code::BACKGROUND
+            ),
+        }
+    }
 }
 
 pub struct TerminalColor<'a> {
@@ -27,52 +82,31 @@ pub struct TerminalColor<'a> {
     pub background: &'a str,
 }
 
-impl TerminalColor<'_> {
+impl TerminalColorUsages for TerminalColor<'_> {
     #[inline]
-    pub fn wrap_foreground(&self, raw: impl AsRef<str>) -> String {
-        format!(
-            "{}{}{}",
-            self.foreground,
-            raw.as_ref(),
-            reset_code::FOREGROUND
-        )
+    fn foreground(&self) -> impl Display {
+        self.foreground
     }
 
     #[inline]
-    pub fn wrap_background(&self, raw: impl AsRef<str>) -> String {
-        format!(
-            "{}{}{}",
-            self.background,
-            raw.as_ref(),
-            reset_code::BACKGROUND
-        )
+    fn background(&self) -> impl Display {
+        self.background
+    }
+}
+
+pub struct CustomTerminalColor {
+    pub foreground: String,
+    pub background: String,
+}
+
+impl TerminalColorUsages for CustomTerminalColor {
+    #[inline]
+    fn foreground(&self) -> impl Display {
+        &self.foreground
     }
 
-    pub fn render_foreground(&self, raw: impl AsRef<str>) -> String {
-        match raw.as_ref().split_once(reset_code::FOREGROUND) {
-            None => self.wrap_foreground(raw),
-            Some((before, after)) => format!(
-                "{}{}{}{}{}",
-                self.foreground,
-                before,
-                self.foreground,
-                after,
-                reset_code::FOREGROUND
-            ),
-        }
-    }
-
-    pub fn render_background(&self, raw: impl AsRef<str>) -> String {
-        match raw.as_ref().split_once(reset_code::BACKGROUND) {
-            None => self.wrap_background(raw),
-            Some((before, after)) => format!(
-                "{}{}{}{}{}",
-                self.background,
-                before,
-                self.background,
-                after,
-                reset_code::BACKGROUND
-            ),
-        }
+    #[inline]
+    fn background(&self) -> impl Display {
+        &self.background
     }
 }
